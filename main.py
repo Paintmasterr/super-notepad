@@ -183,7 +183,11 @@ def redo():
         text_area.edit_redo()
     except:
         pass
-
+def undo():
+    try:
+        text_area.edit_undo()
+    except:
+        pass
 
 text_area = scrolledtext.ScrolledText(root, undo=True,
                                       wrap=WORD, relief=FLAT,
@@ -204,7 +208,7 @@ file_menu.add_command(label='Exit', command=root.destroy)
 
 edit_menu = Menu(main_menu, tearoff=False)
 main_menu.add_cascade(label='Edit', menu=edit_menu)
-edit_menu.add_command(label='Undo', command=text_area.edit_undo)
+edit_menu.add_command(label='Undo', command=undo)
 edit_menu.add_separator()
 edit_menu.add_command(label='Redo', command=redo)
 
