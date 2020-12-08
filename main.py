@@ -9,7 +9,7 @@ root = Tk()
 root.title("NotePad")
 root.geometry('800x500')
 root.resizable(0, 0)
-root.iconbitmap(default='notepad.ico')
+
 language = 'en'
 current_open_file = 'no file'
 font_ = 'Consoles'
