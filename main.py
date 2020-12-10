@@ -190,15 +190,18 @@ def undo():
         pass
 
 def text_color():
-	my_color = colorchooser.askcolor()[1]
-	if my_color:
-		color_font = font.Font(text_area, text_area.cget("font"))
-		text_area.tag_configure("colored", font=color_font, foreground=my_color)
-		current_tags = text_area.tag_names("sel.first")
-		if "colored" in current_tags:
-			text_area.tag_remove("colored", "sel.first", "sel.last")
-		else:
-			text_area.tag_add("colored", "sel.first", "sel.last")
+    my_color = colorchooser.askcolor()[1]
+    if my_color:
+        color_font = font.Font(text_area, text_area.cget("font"))
+        text_area.tag_configure("colored", font=color_font, foreground=my_color)
+        try:
+            current_tags = text_area.tag_names("sel.first")
+            if "colored" in current_tags:
+                text_area.tag_remove("colored", "sel.first", "sel.last")
+            else:
+                text_area.tag_add("colored", "sel.first", "sel.last")
+        except:
+            print('Select text')
 
 def bg_color():
 	my_color = colorchooser.askcolor()[1]
