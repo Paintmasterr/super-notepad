@@ -1,5 +1,5 @@
 from tkinter import *
-from tkinter import filedialog, font, ttk, scrolledtext
+from tkinter import filedialog, font, ttk, scrolledtext, colorchooser
 from gtts import gTTS
 import os
 from textblob import TextBlob
@@ -189,6 +189,46 @@ def undo():
     except:
         pass
 
+def text_color():
+	my_color = colorchooser.askcolor()[1]
+	if my_color:
+		color_font = font.Font(text_area, text_area.cget("font"))
+		text_area.tag_configure("colored", font=color_font, foreground=my_color)
+		current_tags = text_area.tag_names("sel.first")
+		if "colored" in current_tags:
+			text_area.tag_remove("colored", "sel.first", "sel.last")
+		else:
+			text_area.tag_add("colored", "sel.first", "sel.last")
+
+def bg_color():
+	my_color = colorchooser.askcolor()[1]
+	if my_color:
+		text_area.config(bg=my_color)
+
+def all_text_color():
+	my_color = colorchooser.askcolor()[1]
+	if my_color:
+		text_area.config(fg=my_color)
+        
+def night_on():
+	main_color = "#000000"
+	second_color = "#373737"
+	text_color = "Orange"
+
+	root.config(bg=main_color)
+	text_area.config(fg=text_color)
+	text_area.config(bg=second_color)
+
+
+def night_off():
+	main_color = "SystemButtonFace"
+	second_color = "SystemButtonFace"
+	text_color = "black"
+
+	root.config(bg=main_color)
+	text_area.config(fg=text_color)
+	text_area.config(bg="white")
+    
 text_area = scrolledtext.ScrolledText(root, undo=True,
                                       wrap=WORD, relief=FLAT,
                                       width=600, height=400)
@@ -227,5 +267,16 @@ text_to_speech.add_command(label='Speech to Text', command=speech_to_text)
 font_menu = Menu(main_menu, tearoff=False)
 main_menu.add_cascade(label="Format", menu=font_menu)
 font_menu.add_command(label='Font...', command=font_window)
+
+themes_menu = Menu(main_menu, tearoff=False)
+main_menu.add_cascade(label="Themes", menu=themes_menu)
+themes_menu.add_command(label="Night Mode On", command=night_on)
+themes_menu.add_command(label="Night Mode Off", command=night_off)
+
+color_menu = Menu(main_menu, tearoff=False)
+main_menu.add_cascade(label="Colors", menu=color_menu)
+color_menu.add_command(label="Selected Text", command=text_color)
+color_menu.add_command(label="All Text", command=all_text_color)
+color_menu.add_command(label="Background", command=bg_color)
 
 root.mainloop()
