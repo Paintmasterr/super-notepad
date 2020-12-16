@@ -3,7 +3,7 @@ TextEditor program with SpeechRecognition, Text to Speech\
 and other features
 
 ## Done by
-Bolot Zhusubpekov\
+Bolot Zhusupekov\
 Kalmyrza Zholchubekov
 
 ## Installation
